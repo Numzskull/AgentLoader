@@ -12,24 +12,24 @@ import com.sun.tools.attach.AttachNotSupportedException;
 import com.sun.tools.attach.VirtualMachine;
 
 public class Main extends JavaPlugin {
-	private String prefix = "§c[AgentLoader] ";
-	public void onEnable() {
-		String nameOfRunningVM = ManagementFactory.getRuntimeMXBean().getName();
-		String pid = nameOfRunningVM.substring(0, nameOfRunningVM.indexOf('@'));
-		try {
-		    Bukkit.getConsoleSender().sendMessage(prefix + "Attempting to inject agent..");
-			VirtualMachine virtualMachine = VirtualMachine.attach(pid);
-			try {
-				virtualMachine.loadAgent("Agent.jar", null);
-			} catch (AgentLoadException | AgentInitializationException e) {
-			    Bukkit.getConsoleSender().sendMessage(prefix + "Agent failed to inject!");
-				e.printStackTrace();
-			}
-			Bukkit.getConsoleSender().sendMessage(prefix + "Agent injected successfully!");
-			virtualMachine.detach();
-		} catch (AttachNotSupportedException | IOException e) {
-			e.printStackTrace();
-		}
-	}
-
+    private String prefix = "§c[AgentLoader] ";
+    
+    public void onEnable() {
+        String nameOfRunningVM = ManagementFactory.getRuntimeMXBean().getName();
+        String pid = nameOfRunningVM.substring(0, nameOfRunningVM.indexOf('@'));
+        try {
+            Bukkit.getConsoleSender().sendMessage(prefix + "Attempting to inject agent..");
+            VirtualMachine virtualMachine = VirtualMachine.attach(pid);
+            try {
+                virtualMachine.loadAgent("Agent.jar", null);
+            } catch (AgentLoadException | AgentInitializationException e) {
+                Bukkit.getConsoleSender().sendMessage(prefix + "Agent failed to inject!");
+                e.printStackTrace();
+            }
+            Bukkit.getConsoleSender().sendMessage(prefix + "Agent injected successfully!");
+            virtualMachine.detach();
+        } catch (AttachNotSupportedException | IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,0 +1,5 @@
+name: AgentLoader
+main: de.xbrowniecodez.agentloader.Main
+version: 1.0
+author: xBrownieCodez
+description: Tries to bypasses antiagents on Minecraft plugins
